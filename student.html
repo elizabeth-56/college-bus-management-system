@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard - College Bus Management</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fa;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    .logout-btn {
+      background: white;
+      color: #0072ff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background: #e3f0ff;
+    }
+
+    /* Updated layout: one card below another */
+    .dashboard {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 600px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #0072ff;
+    }
+
+    .fee-status {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .paid {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .due {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      resize: none;
+    }
+
+    button.submit-btn {
+      background: #0072ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.submit-btn:hover {
+      background: #005dc1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome, Student</h1>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+
+    <!-- Bus Details -->
+    <div class="card">
+      <h2>Bus Details</h2>
+      <p><b>Bus No:</b> 12A</p>
+      <p><b>Route:</b> Campus → MG Road → City Center</p>
+      <p><b>Driver:</b> John Mathew</p>
+      <p><b>Timing:</b> 7:30 AM - 5:00 PM</p>
+    </div>
+
+    <!-- Fee Details -->
+    <div class="card" id="feeCard">
+      <h2>Bus Fee Details</h2>
+      <p><b>Total Fee:</b> ₹6000</p>
+      <p><b>Paid Amount:</b> ₹4000</p>
+      <p><b>Due Amount:</b> ₹2000</p>
+      <p><b>Status:</b> <span class="fee-status due">Due</span></p>
+    </div>
+
+    <!-- Report Issue -->
+    <div class="card">
+      <h2>Report an Issue</h2>
+      <textarea rows="4" placeholder="Write your issue here..."></textarea>
+      <br><br>
+      <button class="submit-btn">Submit</button>
+    </div>
+
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logged out successfully!");
+      window.location.href = "login.html";
+    }
+
+    // Dynamic fee calculation example
+    const feePaid = 4000;
+    const totalFee = 6000;
+    const due = totalFee - feePaid;
+
+    const feeCard = document.getElementById("feeCard");
+    if (due === 0) {
+      feeCard.innerHTML = `
+        <h2>Bus Fee Details</h2>
+        <p><b>Total Fee:</b> ₹${totalFee}</p>
+        <p><b>Paid Amount:</b> ₹${feePaid}</p>
+        <p><b>Due Amount:</b> ₹0</p>
+        <p><b>Status:</b> <span class="fee-status paid">Paid ✅</span></p>
+      `;
+    }
+  </script>
+</body>
+</html>
