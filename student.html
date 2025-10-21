@@ -24,7 +24,13 @@
       font-size: 20px;
     }
 
-    .logout-btn {
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .logout-btn, .announce-btn {
       background: white;
       color: #0072ff;
       border: none;
@@ -33,11 +39,10 @@
       cursor: pointer;
     }
 
-    .logout-btn:hover {
+    .logout-btn:hover, .announce-btn:hover {
       background: #e3f0ff;
     }
 
-    /* Updated layout: one card below another */
     .dashboard {
       padding: 30px;
       display: flex;
@@ -73,15 +78,8 @@
       display: inline-block;
     }
 
-    .paid {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .due {
-      background: #f8d7da;
-      color: #721c24;
-    }
+    .paid { background: #d4edda; color: #155724; }
+    .due { background: #f8d7da; color: #721c24; }
 
     textarea {
       width: 100%;
@@ -103,16 +101,47 @@
     button.submit-btn:hover {
       background: #005dc1;
     }
+
+    /* Announcement Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 18px;
+      cursor: pointer;
+      color: #0072ff;
+      border: none;
+      background: none;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Welcome, Student</h1>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="header-buttons">
+      <button class="announce-btn" onclick="showAnnouncements()">Announcements</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
   </header>
 
   <div class="dashboard">
-
     <!-- Bus Details -->
     <div class="card">
       <h2>Bus Details</h2>
@@ -138,7 +167,19 @@
       <br><br>
       <button class="submit-btn">Submit</button>
     </div>
+  </div>
 
+  <!-- Announcement Modal -->
+  <div class="modal" id="announceModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeAnnouncements()">✖</button>
+      <h2>Announcements</h2>
+      <ul>
+        <li>Bus 12A will be delayed by 15 minutes today.</li>
+        <li>New pickup point added near City Center.</li>
+        <li>Bus fee for next month must be paid by 5th.</li>
+      </ul>
+    </div>
   </div>
 
   <script>
@@ -147,7 +188,7 @@
       window.location.href = "login.html";
     }
 
-    // Dynamic fee calculation example
+    // Dynamic fee calculation
     const feePaid = 4000;
     const totalFee = 6000;
     const due = totalFee - feePaid;
@@ -161,6 +202,16 @@
         <p><b>Due Amount:</b> ₹0</p>
         <p><b>Status:</b> <span class="fee-status paid">Paid ✅</span></p>
       `;
+    }
+
+    // Announcement modal
+    const modal = document.getElementById("announceModal");
+    function showAnnouncements() { modal.style.display = "flex"; }
+    function closeAnnouncements() { modal.style.display = "none"; }
+
+    // Close modal on outside click
+    window.onclick = function(event) {
+      if (event.target === modal) modal.style.display = "none";
     }
   </script>
 </body>
