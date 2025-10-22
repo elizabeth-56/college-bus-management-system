@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - College Bus Management System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f4f7fc;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #0072ff, #00c6ff);
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover, .active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      color: #0072ff;
+    }
+
+    header button {
+      background: #ff4757;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    header button:hover {
+      background: #e84118;
+    }
+
+    section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      color: #0072ff;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #0072ff;
+      color: white;
+    }
+
+    /* Announcement section */
+    textarea {
+      width: 100%;
+      height: 80px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .announce-btn {
+      margin-top: 10px;
+      background: #0072ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .announce-btn:hover {
+      background: #005dc1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div>
+      <h2>Admin Panel</h2>
+      <a href="#" class="active">🏠 Dashboard</a>
+      <a href="#">👩‍🎓 Students</a>
+      <a href="#">👨‍🏫 Faculty</a>
+      <a href="#">🚌 Drivers</a>
+      <a href="#">⚠️ Issues</a>
+      <a href="#">📢 Announcements</a>
+    </div>
+    <button id="logoutBtn">🚪 Logout</button>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>Welcome, Admin</h1>
+      <button id="logout">Logout</button>
+    </header>
+
+    <section>
+      <h2>👩‍🎓 Student List</h2>
+      <table>
+        <tr><th>Name</th><th>Class</th><th>Dept</th><th>Bus No</th><th>Fee Status</th></tr>
+        <tr><td>Anna Jose</td><td>3rd Year</td><td>CSE</td><td>Bus 12</td><td>Paid</td></tr>
+        <tr><td>Deepa Varghese</td><td>2nd Year</td><td>ECE</td><td>Bus 8</td><td>Due ₹1500</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>👨‍🏫 Faculty List</h2>
+      <table>
+        <tr><th>Name</th><th>Department</th><th>Bus No</th><th>Fee Status</th></tr>
+        <tr><td>John Mathew</td><td>CSE</td><td>Bus 12</td><td>Paid</td></tr>
+        <tr><td>Elsa Paul</td><td>EEE</td><td>Bus 5</td><td>Due ₹500</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>🚌 Driver List</h2>
+      <table>
+        <tr><th>Name</th><th>Bus No</th><th>Route</th><th>Faculty Incharge</th></tr>
+        <tr><td>Ramesh Kumar</td><td>Bus 12</td><td>Thodupuzha - College</td><td>John Mathew</td></tr>
+        <tr><td>Shaji P</td><td>Bus 5</td><td>Kattappana - College</td><td>Elsa Paul</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>⚠️ Issue Reports</h2>
+      <table>
+        <tr><th>Reported By</th><th>Role</th><th>Bus No</th><th>Issue</th></tr>
+        <tr><td>Anna Jose</td><td>Student</td><td>Bus 12</td><td>Seat broken near window</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>📢 Post New Announcement</h2>
+      <textarea id="announcementText" placeholder="Enter your announcement here..."></textarea>
+      <button class="announce-btn" id="announceBtn">Post Announcement</button>
+      <p id="statusMsg"></p>
+    </section>
+
+  </div>
+
+  <script>
+    document.getElementById('logout').addEventListener('click', () => {
+      alert('Admin logged out.');
+      window.location.href = "login.html";
+    });
+
+    document.getElementById('announceBtn').addEventListener('click', () => {
+      const msg = document.getElementById('announcementText').value.trim();
+      if (msg) {
+        document.getElementById('statusMsg').textContent = "✅ Announcement posted successfully!";
+        document.getElementById('announcementText').value = "";
+      } else {
+        alert("Please enter an announcement message!");
+      }
+    });
+  </script>
+
+</body>
+</html>
